@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <script src="https://kit.fontawesome.com/555d6e3f3d.js" crossorigin="anonymous" defer></script>
+
+</head>
+<body class="">
+<section class="game-first-page">
+    <h1 class="game-name">بازی حدس کلمات</h1>
+
+    <button class="start-game">شروع بازی</button>
+
+    <div class="get-player-name">
+        <button class="cancel-game-start">x</button>
+        <input class="player-name-input" type="text" placeholder="لطفا اسم خود را وارد کنید" maxlength="20">
+        <div class="validation-name">نام بازیکن را وارد کنید</div>
+        <button class="confirm-name-btn">تایید</button>
+    </div>
+
+
+    <div title="قوانین بازی" class="game-rules-hover">
+        <img src="svg/help_24dp_EA3323_FILL0_wght300_GRAD0_opsz24.svg">
+    </div>
+
+    <div class="game-rules">
+        <h1>قوانین بازی :</h1>
+        <ul>
+            <li>1. مدت زمان هر دور بازی 100 ثانیه میباشد</li>
+            <li>2. تعداد دفعات مجاز حدس حرف اشتباه ، 8 بار میباشد</li>
+            <li>3. حدس هر حرف 1 امتیاز و حدس هر کلمه درنهایت 5 امتیاز دارد</li>
+            <li>4. در طول هر بازی 3 کمک دارید که میتوانید از هر کدام 1 بار استفاده کنید</li>
+        </ul>
+    </div>
+
+
+</section>
+
+<section class="game-section">
+    <div class="secret-word-container">
+        <div class="word-category"></div>
+        <div class="secret-word">
+
+        </div>
+    </div>
+    <div class="keyboard">
+        <span class="k-span" id="ا">ا</span>
+        <span class="k-span" id="ب">ب</span>
+        <span class="k-span" id="پ">پ</span>
+        <span class="k-span" id="ت">ت</span>
+        <span class="k-span" id="ث">ث</span>
+        <span class="k-span" id="ج">ج</span>
+        <span class="k-span" id="چ">چ</span>
+        <span class="k-span" id="ح">ح</span>
+        <span class="k-span" id="خ">خ</span>
+        <span class="k-span" id="د">د</span>
+        <span class="k-span" id="ذ">ذ</span>
+        <span class="k-span" id="ر">ر</span>
+        <span class="k-span" id="ز">ز</span>
+        <span class="k-span" id="س">س</span>
+        <span class="k-span" id="ش">ش</span>
+        <span class="k-span" id="ص">ص</span>
+        <span class="k-span" id="ض">ض</span>
+        <span class="k-span" id="ط">ط</span>
+        <span class="k-span" id="ظ">ظ</span>
+        <span class="k-span" id="ع">ع</span>
+        <span class="k-span" id="غ">غ</span>
+        <span class="k-span" id="ف">ف</span>
+        <span class="k-span" id="ق">ق</span>
+        <span class="k-span" id="ک">ک</span>
+        <span class="k-span" id="گ">گ</span>
+        <span class="k-span" id="ل">ل</span>
+        <span class="k-span" id="م">م</span>
+        <span class="k-span" id="ن">ن</span>
+        <span class="k-span" id="و">و</span>
+        <span class="k-span" id="ه">ه</span>
+        <span class="k-span" id="ی">ی</span>
+    </div>
+
+    <div class="information">
+        <div class="time-duration">
+            <span class="left-time">100</span>
+            <span class="timer-span">ثانیه</span>
+        </div>
+
+        <div class="lives">
+            <span class="lives-counter" id="incorrectCounter">8</span>
+            <span class="lives-counter">*</span>
+            <span>
+                <img class="live-svg" src="svg/cardiology_24dp_FF0000B5_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+            </span>
+        </div>
+    </div>
+
+
+    <div class="game-hint-div">
+        <img src="svg/help_24dp_EA3323_FILL0_wght300_GRAD0_opsz24.svg">
+    </div>
+    <ul class="get-hint-list">
+        <li class="hint-number-one">
+            <span>نمایش یک حرف تصادفی</span>
+            <span style="display:none;" class="statues" id="first-hint"></span>
+            <span class="random-details">یک حرف یه صورت تصادفی با کسر 2 امتیاز نمایش داده میشود</span>
+        </li>
+        <li class="hint-number-two">
+            <span>نمایش یک حرف انتخابی بازیکن</span>
+            <span style="display:none;" class="statues" id="second-hint"></span>
+            <span class="choose-details">یک حرف یه صورت انتخابی با کسر 3 امتیاز نمایش داده میشود</span>
+        </li>
+        <li class="hint-number-there">
+            <span>نمایش کلمه</span>
+            <span style="display:none;" class="statues" id="third-hint"></span>
+            <span class="show-all-details">کلمه با کسر 10 امتیاز نمایش داده میشود</span>
+        </li>
+    </ul>
+
+
+
+    <div class="hint-number-two-div">
+        <button class="cancel-hint-number-two">x</button>
+       <select class="show-available-options">
+           <option selected disabled value="undefined">شماره حرف انتخابی</option>
+       </select>
+        <button id="show-letter-btn">تایید</button>
+    </div>
+
+    <div class="hint-number-there-div">
+        <button class="ok-hint-there">x</button>
+        <span class="show-word"></span>
+    </div>
+
+
+    <div class="player-gaming-info">
+        <div>
+            <span>امتیاز : </span>
+            <span class="player-score">0</span>
+        </div>
+        <div>
+            <span>کلمات : </span>
+            <span class="player-guessed-words">0</span>
+        </div>
+    </div>
+
+    <span class="change-score-value">+1</span>
+    <span class="change-guessed-words-value">+1</span>
+
+</section>
+
+<section class="finish-game">
+    <div class="finish-game-container">
+        <div class="div1">
+            <img title="اسم بازیکن" src="svg/account_circle_24dp_FFF_FILL0_wght200_GRAD0_opsz24.svg" alt="">
+            <p class="player-name"></p>
+        </div>
+        <div class="div2">
+            <img title="امتیاز" src="svg/sports_score_24dp_FFF_FILL0_wght200_GRAD0_opsz24.svg">
+            <p class="score"></p>
+        </div>
+        <div class="div3">
+            <img title="تعداد کلمات حدس زده شده" src="svg/abc_24dp_FFF_FILL0_wght200_GRAD0_opsz24.svg">
+            <p class="correct-guessed-words"></p>
+        </div>
+        <div class="div4">
+            <img title="همه کلمات" src="svg/receipt_long_24dp_FFF_FILL0_wght200_GRAD0_opsz24.svg">
+            <p class="shown-words"></p>
+        </div>
+
+        <button class="replay-game">تکرار بازی</button>
+    </div>
+</section>
+
+</body>
+</html>
