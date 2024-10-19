@@ -2165,6 +2165,7 @@ body {
     .secret-word-container {
         margin-top: 140px;
         margin-bottom: 60px;
+        width: 1250px;
     }
 
     .word-category {
@@ -2173,6 +2174,7 @@ body {
 
     .secret-word {
         flex-wrap: nowrap;
+        width: fit-content;
     }
 
     .secret-word img {
